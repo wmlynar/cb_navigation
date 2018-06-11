@@ -1,0 +1,5 @@
+local_planner : pose_follower/PoseFollower
+controller_frequency: 10.0
+robot_base_frame: /base_link
+global_frame: /map
+
