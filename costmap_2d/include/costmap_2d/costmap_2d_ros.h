@@ -213,6 +213,18 @@ public:
    * getUnpaddedRobotFootprint(). */
   void setUnpaddedRobotFootprintPolygon(const geometry_msgs::Polygon& footprint);
 
+  //woj
+  double getMapUpdateFrequency()
+    {
+      return map_update_frequency_;
+    }
+
+  Costmap2DPublisher* getPublisher()
+  {
+    return publisher_;
+  }
+  //woj end
+
 protected:
   LayeredCostmap* layered_costmap_;
   std::string name_;
@@ -220,6 +232,10 @@ protected:
   std::string global_frame_;  ///< @brief The global frame for the costmap
   std::string robot_base_frame_;  ///< @brief The frame_id of the robot base
   double transform_tolerance_;  ///< timeout before transform errors
+
+  //woj
+  double map_update_frequency_;
+  //woj end
 
 private:
   /** @brief Set the footprint from the new_config object.

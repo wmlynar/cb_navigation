@@ -75,6 +75,9 @@ Costmap2DROS::Costmap2DROS(std::string name, tf::TransformListener& tf) :
     publisher_(NULL),
     dsrv_(NULL),
     footprint_padding_(0.0)
+//woj
+    ,map_update_frequency_(0.0)
+//woj end
 {
   // Initialize old pose with something
   old_pose_.setIdentity();
@@ -285,6 +288,10 @@ void Costmap2DROS::reconfigureCB(costmap_2d::Costmap2DConfig &config, uint32_t l
   }
   map_update_thread_shutdown_ = false;
   double map_update_frequency = config.update_frequency;
+
+  //woj
+  this->map_update_frequency_ = map_update_frequency;
+  //woj end
 
   double map_publish_frequency = config.publish_frequency;
   if (map_publish_frequency > 0)

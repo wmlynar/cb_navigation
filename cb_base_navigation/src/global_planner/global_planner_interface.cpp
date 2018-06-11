@@ -90,7 +90,9 @@ void GlobalPlannerInterface::poseCallback(const geometry_msgs::PoseStampedConstP
 bool GlobalPlannerInterface::checkPlan(CheckPlanRequest &req, CheckPlanResponse &resp)
 {
     // Lock the costmap for a sec
-    boost::unique_lock< boost::shared_mutex > lock(*(costmap_.getCostmap()->getLock()));
+//    boost::unique_lock< boost::shared_mutex > lock(*(costmap_.getCostmap()->getLock()));
+//woj
+	boost::unique_lock<costmap_2d::Costmap2D::mutex_t> lock(*(costmap_.getCostmap()->getMutex()));
 
     if(req.plan.size() == 0) { ROS_ERROR("No plan specified so no check can be performed."); return false; }
     resp.valid = global_planner_->checkPlan(req.plan);
@@ -100,7 +102,9 @@ bool GlobalPlannerInterface::checkPlan(CheckPlanRequest &req, CheckPlanResponse 
 bool GlobalPlannerInterface::getPlan(GetPlanRequest &req, GetPlanResponse &resp)
 {
     // Lock the costmap for a sec
-    boost::unique_lock< boost::shared_mutex > lock(*(costmap_.getCostmap()->getLock()));
+//    boost::unique_lock< boost::shared_mutex > lock(*(costmap_.getCostmap()->getLock()));
+//woj
+	boost::unique_lock<costmap_2d::Costmap2D::mutex_t> lock(*(costmap_.getCostmap()->getMutex()));
 
     // Check the input
     if(req.goal_position_constraints.size() > 1) { ROS_ERROR("You have specified more than 1 constraint, this is not yet supported."); return false; }
