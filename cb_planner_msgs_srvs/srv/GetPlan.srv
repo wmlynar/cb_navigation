@@ -1,0 +1,5 @@
+PositionConstraint[]        goal_position_constraints
+---
+geometry_msgs/PoseStamped[] plan
+bool                        succes
+
